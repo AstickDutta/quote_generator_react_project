@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [qoute, setQuote] = useState("Demo Quote");
+  const handleQuote = async () => {
+    const res = await axios.get("https://api.quotable.io/random");
+    setQuote(res.data.content);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="box">
+      <i className="fas fa-quote-left fa2"></i>
+      <div className="text">
+        <i className="fas fa-quote-right fa1"></i>
+        <div>
+          <h3>Quote of the day</h3>
+          <p>{qoute}</p>
+          <button onClick={handleQuote}>Next</button>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
